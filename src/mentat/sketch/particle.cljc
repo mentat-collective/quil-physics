@@ -22,18 +22,17 @@
                            (/ (q/height) 2)]
         (q/ellipse x (- y) 5 5)))))
 
-(defn sketch []
+(defn render [node width height]
   (let [m 1
         g 9.8
         L (L-particle m g)
         initial-state (up 0 (up 5 5) (up 4 10))
         built (mm/build L initial-state)]
-    (q/defsketch uniform-particle
-      :title "Particle in uniform gravity"
-      :host "app"
-      :size [1200 800]
-      :setup (:setup built)
-      :update (:update built)
-      :draw (draw (:xform built))
-      :features [:keep-on-top]
-      :middleware [m/fun-mode m/navigation-2d])))
+    (q/sketch
+     :host node
+     :size [width height]
+     :setup (:setup built)
+     :update (:update built)
+     :draw (draw (:xform built))
+     :features [:keep-on-top]
+     :middleware [m/fun-mode m/navigation-2d])))

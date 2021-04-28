@@ -18,18 +18,17 @@
     (- (* (/ 1 2) m (square qdot))
        (* (/ 1 2) k (square q)))))
 
-(defn sketch []
+(defn render [node width height]
   (let [m 1
         k 9.8
         L (L-harmonic m k)
         initial-state (up 0 (up 5 5) (up 4 10))
         built (mm/build L initial-state)]
-    (q/defsketch harmonic-oscillator
-      :title "Harmonic oscillator"
-      :host "app"
-      :size [1200 800]
-      :setup (:setup built)
-      :update (:update built)
-      :draw (mp/draw (:xform built))
-      :features [:keep-on-top]
-      :middleware [m/fun-mode m/navigation-2d])))
+    (q/sketch
+     :host node
+     :size [width height]
+     :setup (:setup built)
+     :update (:update built)
+     :draw (mp/draw (:xform built))
+     :features [:keep-on-top]
+     :middleware [m/fun-mode m/navigation-2d])))

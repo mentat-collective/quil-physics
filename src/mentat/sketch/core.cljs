@@ -8,17 +8,14 @@
 
 (defn ^:export run-sketch []
   ;; Pendula
-  #_(pend/triple-sketch)
-  #_(pend/double-sketch)
-
   ;; particle falling.
-  #_(part/sketch)
+  #_(part/render)
 
   ;; spring!
-  #_(spring/sketch)
+  #_(spring/render)
 
   ;; Driven Pendulum
   #_(driven/render)
 
   ;; particle on an ellipsoid, 3d!
-  (ell/sketch 10 250 40 40))
+  (ell/render 10 250 40 40))

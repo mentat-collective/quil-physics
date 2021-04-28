@@ -38,24 +38,22 @@
         (q/with-translation [x y z]
           (q/sphere ball-radius))))))
 
-(defn sketch [ball-radius a b c]
-  (let [m 1
-        a-path (+ ball-radius a)
-        b-path (+ ball-radius b)
-        c-path (+ ball-radius c)
-        initial-state (up 0 (up 1 1) (up 1.5 1.2))
-        L (mm/transform (L-free-3d m)
-                        (elliptical->rect a-path b-path c-path))
-        built (mm/build L initial-state)]
-
-    (q/defsketch triaxial-particle
-      :title "Particle on an ellipse"
-      :host "app"
-      :size [1200 800]
-      ;; setup function called only once, during sketch initialization.
-      :setup (:setup built)
-      :update (:update built)
-      :draw (draw-ellipse ball-radius a b c (:xform built))
-      :features [:keep-on-top]
-      :renderer :p3d
-      :middleware [m/fun-mode m/navigation-3d])))
+(defn render [ball-radius a b c]
+  (fn [node width height]
+    (let [m 1
+          a-path (+ ball-radius a)
+          b-path (+ ball-radius b)
+          c-path (+ ball-radius c)
+          initial-state (up 0 (up 1 1) (up 1.5 1.2))
+          L (mm/transform (L-free-3d m)
+                          (elliptical->rect a-path b-path c-path))
+          built (mm/build L initial-state)]
+      (q/sketch
+       :host node
+       :size [width height]
+       :setup (:setup built)
+       :update (:update built)
+       :draw (draw-ellipse ball-radius a b c (:xform built))
+       :features [:keep-on-top]
+       :renderer :p3d
+       :middleware [m/fun-mode m/navigation-3d]))))

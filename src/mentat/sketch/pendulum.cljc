@@ -115,7 +115,7 @@
         (doseq [end nodes]
           (bob! end))))))
 
-(defn double-sketch []
+(defn render-double [node width height]
   (let [g 98
         masses (down 1 1)
         lengths [4 10]
@@ -124,19 +124,17 @@
                           (up pi (/ pi 2))
                           (up 0 0))
         built (mm/build L initial-state)]
+    (q/sketch
+     :host node
+     :size [width height]
+     :setup (:setup built)
+     :update (:update built)
+     :draw (draw-chain
+            (:xform built))
+     :features [:keep-on-top :present]
+     :middleware [m/fun-mode m/navigation-2d])))
 
-    (q/defsketch double-pendulum
-      :title "Double pendulum!"
-      :host "app"
-      :size [1200 800]
-      :setup (:setup built)
-      :update (:update built)
-      :draw (draw-chain
-             (:xform built))
-      :features [:keep-on-top :present]
-      :middleware [m/fun-mode m/navigation-2d])))
-
-(defn triple-sketch []
+(defn render-triple [node width height]
   (let [g 98
         masses (down 1 1 1)
         lengths [4 10 12]
@@ -145,13 +143,12 @@
                           (up pi (/ pi 2) (/ pi 2))
                           (up 0 0 0))
         built (mm/build L initial-state)]
-    (q/defsketch triple-pendulum
-      :title "Triple pendulum!"
-      :host "app"
-      :size [1200 800]
-      :setup (:setup built)
-      :update (:update built)
-      :draw (draw-chain
-             (:xform built))
-      :features [:keep-on-top :present]
-      :middleware [m/fun-mode m/navigation-2d])))
+    (q/sketch
+     :host node
+     :size [width height]
+     :setup (:setup built)
+     :update (:update built)
+     :draw (draw-chain
+            (:xform built))
+     :features [:keep-on-top :present]
+     :middleware [m/fun-mode m/navigation-2d])))
