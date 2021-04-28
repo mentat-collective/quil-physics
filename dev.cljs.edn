@@ -1,0 +1,10 @@
+;; This file is used by figwheel to configure the cljs compiler.
+^{:watch-dirs ["src" "devcards"]
+  :extra-main-files {:devcards
+                     {:main mentat.sketch.cards}}
+  :open-url "http://localhost:[[server-port]]/cards.html"}
+{:main mentat.sketch.core
+ :devcards true
+ :optimizations :none
+ :pretty-print true
+ :source-map true}

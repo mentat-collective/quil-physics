@@ -1,0 +1,12 @@
+{:paths ["src" "target" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.0"}
+        org.clojure/clojurescript {:mvn/version "1.10.439"}
+        reagent/reagent {:mvn/version "1.0.0"}
+        sicmutils/sicmutils {:mvn/version "0.18.0"}
+        quil/quil {:mvn/version "3.1.0"}}
+ :aliases
+ {:fig {:extra-paths ["resources" "devcards"]
+        :extra-deps
+        {com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
+         com.bhauman/figwheel-main {:mvn/version "0.2.3"}
+         devcards/devcards {:mvn/version "0.2.7"}}}}}
